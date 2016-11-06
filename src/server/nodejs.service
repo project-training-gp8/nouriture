@@ -1,0 +1,13 @@
+﻿[Unit]
+Description=nodejs web server
+After=network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/userScript/startNodeSrv.sh
+ExecReload=/usr/bin/userScript/restartNodeSrv.sh
+ExecStop=/usr/bin/userScript/stopNodeSrv.sh
+
+
+[Install]
+WantedBy=multi-user.target

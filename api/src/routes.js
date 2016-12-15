@@ -1,14 +1,10 @@
-//var router = require("express").Router();
 var loginRoute = require("./login/route");
-//var userRoute = require("./users/route");
-var recipeRoute = require("./recipes");
+var userRoute = require("./user/route");
+var recipeRoute = require("./recipe/route");
 
-//var Route = require("/route");
-
-//Routes setup
-//router.use("login", loginRoute);
-//router.use("user", userRoute);
-//router.use("recipe", recipeRoute);
-module.exports.recipe = recipeRoute;
-//module.exports.user = userRoute;
-module.exports.login = loginRoute;
+//Routes setup export func cause i'm lazy
+module.exports = function(app){
+  app.use("/api/login/", loginRoute);
+  app.use("/api/user/", userRoute);
+  app.use("/api/recipe", recipeRoute);
+};

@@ -35,9 +35,10 @@ app.use("/", function(res, req, next){
 
 //routing
 //app.use("/", routes.root);
-app.use("/api/login/", routes.login);
-app.use("/api/user/", routes.user);
-app.use("/api/recipe/", routes.recipe);
+routes(app);
+//app.use("/api/login/", routes.login);
+//app.use("/api/user/", routes.user);
+//app.use("/api/recipe/", routes.recipe);
 //app.use("/api/search/", routes.shit);
 app.use("/", test);
 //Authorization

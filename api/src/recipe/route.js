@@ -6,11 +6,10 @@ route.get("/", function(req, res){
 	/*
 	** Get the lastest user submited/favorited recipes
 	**
-	** Params: None
+	** Params: token(optional)
 	** Return values:
-	**	- 200 + No recipes: User has no recipes.
-	**	- 200 : OK
-	**	- 403 : need auth
+	**	- 200 : User authenticated -> their recipes
+	**	- 200 : Anonymous user -> homepage recipes
 	** TODO: plug authorization (we need an error sent back to an unauthenticated user)
 	*/
 	var err = {error: null, code: 200};

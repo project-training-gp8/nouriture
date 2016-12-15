@@ -54,3 +54,7 @@ jspm_packages
 mongo.db
 #redis files
 dump.db
+dump.rdb
+#Misc local files (prevent commit of shitty test files)
+test
+api-creds.txt

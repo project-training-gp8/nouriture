@@ -47,3 +47,10 @@ jspm_packages
 # Output of 'npm pack'
 *.tgz
 
+#vim undo files
+.*.un~
+
+#mongodb db folder
+mongo.db
+#redis files
+dump.db

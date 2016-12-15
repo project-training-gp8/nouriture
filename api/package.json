@@ -1,0 +1,36 @@
+{
+  "name": "nourriture-api",
+  "version": "1.0.0",
+  "description": "The REST api of nourriture app for group 8 in software project training",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "node src/index.js",
+    "debug": "node node_modules/nodemon/bin/nodemon.js src/index.js",
+    "lint": "jslint src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/project-training-gp8/nourriture.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/project-training-gp8/nourriture/issues"
+  },
+  "homepage": "https://github.com/project-training-gp8/nourriture#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-permissions": "0.1.0",
+    "jsonwebtoken": "^7.1.9",
+    "mongoose": "*",
+    "morgan": "^1.7.0",
+    "redis": "*"
+  },
+  "devDependencies": {
+    "jslint": "*",
+    "nodemon": "*",
+    "morgan": "*"
+  }
+}

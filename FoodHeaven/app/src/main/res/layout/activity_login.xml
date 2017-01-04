@@ -71,6 +71,13 @@
                 android:clickable="true"
                 android:onClick="launchmainpage"/>
 
+            <Button
+                android:text="Register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/RegisterButton"
+                android:onClick="launchRegister" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

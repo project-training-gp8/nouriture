@@ -202,6 +202,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return password.length() > 4;
     }
 
+    public void launchRegister(View view) {
+        Intent myIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+        LoginActivity.this.startActivity(myIntent);
+    }
+
     /**
      * Shows the progress UI and hides the login form.
      */
@@ -291,6 +296,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
     }
+
 
     /**
      * Represents an asynchronous login/registration task used to authenticate

@@ -10,25 +10,15 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import java.util.Calendar;
-import java.util.Date;
+public class RegisterActivity2 extends AppCompatActivity {
 
-public class RegisterActivity extends AppCompatActivity {
-
-    EditText email = (EditText)findViewById(R.id.Email);
-    EditText password = (EditText)findViewById(R.id.Password);
-    EditText confirmPassword = (EditText)findViewById(R.id.confirmPassworrd);
-    EditText firstName = (EditText)findViewById(R.id.FistName);
-    EditText lastName = (EditText)findViewById(R.id.LastName);
     int year;
     int month;
     int day;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -38,9 +28,16 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+        EditText email = (EditText)findViewById(R.id.Email);
+        EditText password = (EditText)findViewById(R.id.Password);
+        EditText confirmPassword = (EditText)findViewById(R.id.confirmPassworrd);
+        EditText firstName = (EditText)findViewById(R.id.FistName);
+        EditText lastName = (EditText)findViewById(R.id.LastName);
+        int year;
+        int month;
+        int day;
             }
         });
-
     }
 
     public void fillDateBirthday(DatePicker date){
@@ -57,5 +54,4 @@ public class RegisterActivity extends AppCompatActivity {
     public void launchRegistration(View v) {
 
     }
-
 }

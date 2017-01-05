@@ -24,12 +24,12 @@
         </activity>
         <activity android:name=".MainPage" />
         <activity
-            android:name=".RegisterActivity"
-            android:label="@string/title_activity_register"
+            android:name=".getBirthdayDate"
+            android:label="@string/title_activity_date_picker"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DatePicker"
-            android:label="@string/title_activity_date_picker"
+            android:name=".RegisterActivity2"
+            android:label="@string/title_activity_register2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

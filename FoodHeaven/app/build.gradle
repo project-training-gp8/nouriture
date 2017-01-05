@@ -28,4 +28,5 @@ dependencies {
     compile 'com.android.support:design:24.2.1'
     testCompile 'junit:junit:4.12'
     compile files('C:/Users/Tchaokko/Desktop/nourriture/FoodHeaven/Libs/android-async-http-1.4.9.jar')
+    compile files('libs/httpclient-4.3.6.jar')
 }

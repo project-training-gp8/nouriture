@@ -6,7 +6,8 @@ package com.example.tchaokko.foodheaven;
 
 import org.json.*;
 import com.loopj.android.http.*;
-import android.preference.PreferenceActivity.Header;
+import cz.msebera.android.httpclient.*;
+
 
 public class ApiClassUsage {
 

@@ -13,7 +13,7 @@ import android.preference.PreferenceActivity.Header;
 
 
 public class httpConnexionManager {
-    private static final string BASE_URL = "https://"
+    private static final String BASE_URL = "https://otatsumi.synology.me";
     private static AsyncHttpClient client =  new AsyncHttpClient();
 
 

@@ -11,7 +11,7 @@ import cz.msebera.android.httpclient.*;
 
 public class ApiClassUsage {
 
-    public void FirstConnexion(JSONArray infoUser) throws JSONException {
+    public static void FirstConnexion(JSONObject infoUser) throws JSONException {
         RequestParams params = new RequestParams();
         params.put("data", infoUser);
         httpConnexionManager.get("api/test", params, new JsonHttpResponseHandler() {

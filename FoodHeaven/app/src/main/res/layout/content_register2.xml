@@ -12,6 +12,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.tchaokko.foodheaven.RegisterActivity2"
     tools:showIn="@layout/activity_register2">
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,6 +97,7 @@
         android:layout_below="@+id/DateView"
         android:layout_centerHorizontal="true"
         android:id="@+id/Register"
-        android:onClick="LaunchRegistration" />
+        android:onClick="launchRegistration" />
+
 
 </RelativeLayout>

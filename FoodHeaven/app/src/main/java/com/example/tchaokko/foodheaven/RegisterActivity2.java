@@ -10,11 +10,19 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-public class RegisterActivity2 extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    int year;
-    int month;
-    int day;
+public class RegisterActivity2 extends AppCompatActivity {
+    EditText email;
+    EditText password ;
+    EditText confirmPassword ;
+    EditText firstName ;
+    EditText lastName ;
+    String hashedpwd;
+    int year = -1;
+    int month = -1;
+    int day = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +36,7 @@ public class RegisterActivity2 extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-        EditText email = (EditText)findViewById(R.id.Email);
-        EditText password = (EditText)findViewById(R.id.Password);
-        EditText confirmPassword = (EditText)findViewById(R.id.confirmPassworrd);
-        EditText firstName = (EditText)findViewById(R.id.FistName);
-        EditText lastName = (EditText)findViewById(R.id.LastName);
-        int year;
-        int month;
-        int day;
+
             }
         });
     }
@@ -52,6 +53,51 @@ public class RegisterActivity2 extends AppCompatActivity {
     }
 
     public void launchRegistration(View v) {
+        email = (EditText)findViewById(R.id.Email);
+        password = (EditText)findViewById(R.id.Password);
+        confirmPassword = (EditText)findViewById(R.id.confirmPassworrd);
+        firstName = (EditText)findViewById(R.id.FistName);
+        lastName = (EditText)findViewById(R.id.LastName);
+        if (!checkInfoRegistration()){
+            return;
+        }
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("firstName", firstName.getText().toString());
+            obj.put("lastName", lastName.getText().toString());
+            obj.put("email", email.getText().toString());
+            obj.put("pwd",hashedpwd);
+            ApiClassUsage.FirstConnexion(obj);
+        }
+        catch(JSONException e){
 
+        }
+    }
+
+    private boolean checkInfoRegistration() {
+        if (!checkpassword()){
+            //TODO aff error password
+            return false;
+        }
+        if (email.getText().length() < 1
+                || firstName.getText().length() < 1
+                || lastName.getText().length() < 1
+                || this.year == -1
+                || this.month == -1
+                || this.day == -1){
+            //TODO aff error registration
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkpassword() {
+        String pass = password.getText().toString();
+        String confPass = confirmPassword.getText().toString();
+        if (pass.contentEquals(confPass) && pass.length() > 6){
+            hashedpwd = HashMd5.md5(pass);
+            return true;
+        }
+        return false;
     }
 }

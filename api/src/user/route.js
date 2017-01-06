@@ -59,13 +59,13 @@ route.get("/u/:user"/*show 1 user*/, function(req, res){
 	res.json({"success":true, "user": req.userParam});
 });
 
-route.put("/u/:user"/*modify own user*/,
-	function(req, res){
-		var query = User.find({});
+route.put("/"/*modify own user*/,
+	function(req, res, next){
+		var query = User.find({_id: req.locals.userId});
 		res.send(res.generic);
 	});
-
-route.post("/new/"/*kittens and butterflies*/,
+/*Create a new user AKA register*/
+route.post("/"/*kittens and butterflies*/,
 	function (req, res, next){
 
 });

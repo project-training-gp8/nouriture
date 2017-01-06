@@ -67,9 +67,9 @@ route.put("/"/*modify own user*/,
     var query = req.findByIdAndUpdate(id,
     {
       $set: {
-        name: req.param.name,
-        email: req.param.email,
-        avatar: req.param.avatar
+        name: req.body.name,
+        email: req.body.email,
+        avatar: req.body.avatar
       }
     }, { new: true }, function (err, req) {
   if (err) return next(err);

@@ -44,7 +44,9 @@ route.get("/recipes/", function(req, res, next){
 });
 
 route.param("user", function(req, res, next, userId){
-	User.findOne({name: uid}, function(err, userResult){
+	var query = User.findOne({name: userId});
+  query.select({name:1, email:1, avatar:1});
+  query.exec(function(err, userResult){
 		if (err) next(err);//No user found or something
 		req.userParam = userResult;
 		next();
@@ -61,7 +63,17 @@ route.get("/u/:user"/*show 1 user*/, function(req, res){
 
 route.put("/"/*modify own user*/,
 	function(req, res, next){
-		var query = User.find({_id: req.locals.userId});
+		//var query = User.find({_id: req.locals.userId});
+    var query = req.findByIdAndUpdate(id, 
+    {
+      $set: {
+        name: req.param.name,
+        email: req.param.email,
+        avatar: req.param.avatar
+      }
+    }, { new: true }, function (err, req) {
+  if (err) return next(err);
+});
 		res.send(res.generic);
 	});
 /*Create a new user AKA register*/

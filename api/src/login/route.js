@@ -15,7 +15,7 @@ route.post("/", function(req, res, next){
 	var UserSchema = require("../models/user");
 	console.log(req.params, req.body);
 
-	UserSchema.findOne({email: req.params.email}, function(err, result){
+	UserSchema.findOne({email: req.body.email}, function(err, result){
 		//console.log(err,result);
 		if (result == null) {
 			return next(new tError(403, "AuthenticationError", null));
@@ -38,7 +38,7 @@ route.post("/", function(req, res, next){
 					.update(pld.toString('base64'),'base64').digest("base64");
 					return retval;
 			}};
-			if (req.params.password == result.pass){
+			if (req.body.password == result.pass){
 				res.generic.data = {token: token.sig(token.header, token.payload)};
 			}
 			else{

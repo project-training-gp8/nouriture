@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 module.exports = mongoose.model("Recipe", new Schema({
 	name: String,
 	user: Schema.Types.ObjectId,
-	ingredients: [Schema.Types.ObjectId],//and so much more
+	ingredients: [String],//and so much more
 	comments: [Schema.Types.ObjectId],
 	directions: [{image:String, title: String, text: String}],
 	favorites: {

@@ -102,6 +102,8 @@ route.get("/test/create/:itmn", function(req, res){
 				//schema: 1
 			},
 			desc: "Vous l'aimez vous la connaissez c'est bien elle oui."
+			image:{large: "http://www.n-tv.de/img/incoming/origs3133601/6402733028-w1000-h960/nutella.jpg",
+						small: "http://images6.fanpop.com/image/photos/35000000/Nutella-chocolate-35061216-120-84.png"}
 		});
 	testRecipes.save(function(err, whatever){
 		console.log(err, whatever);

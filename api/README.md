@@ -24,5 +24,9 @@ GET /api/recipe/:id/(detailed)?
       400(bad parameter)
   return {_id, name, user, desc, image, directions([{title, text, image}]), comments([ObjectId]), favorites(???)}
 POST /api/recipe/
-  params (POST name, )
+  params (POST name, ect...)
 PUT /api/recipe/:id
+  params recipe id ()
+
+POST /api/login
+  params (POST user, POST password)

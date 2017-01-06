@@ -79,9 +79,11 @@ route.put("/"/*modify own user*/,
 /*Create a new user AKA register*/
 route.post("/"/*kittens and butterflies*/,
 	function (req, res, next){
-		if (req.body.password && req.body.email && req.body.name){
+		console.log("Requested user account", req.body);
+		if (req.body.password && req.body.email){
 			var query = User.findOne({email: req.params.email});
 			query.exec(function(err, result){
+				console.log("user found? ", result);
 				if (!handle.database(error, req, res, next, result)){
 					var innerQuery = new User({
 						firstName: req.body.firstName,
@@ -93,6 +95,7 @@ route.post("/"/*kittens and butterflies*/,
 					});
 					innerQuery.save(function(err){
 						if (err){return next(new tError(400, "Database Error", err));}
+						console.log("last stage of user register it works godd job!");
 						res.send(res.generic);
 					});
 				}

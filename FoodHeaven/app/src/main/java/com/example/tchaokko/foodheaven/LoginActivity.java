@@ -84,13 +84,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              //  attemptLogin();
-            }
-        });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -102,6 +95,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         getLoaderManager().initLoader(0, null, this);
+    }
+
+
+    public void launchMainpage(View view) {
+        Intent MyIntent = new Intent(LoginActivity.this, MainPage.class);
+        LoginActivity.this.startActivity(MyIntent);
     }
 
     private boolean mayRequestContacts() {
@@ -310,11 +309,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;
-        }
-
-        public void launchmainpage(View view) {
-            Intent MyIntent = new Intent(LoginActivity.this, MainPage.class);
-            LoginActivity.this.startActivity(MyIntent);
         }
 
 

@@ -64,12 +64,11 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:text="Button"
+                android:text="Login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button"
-                android:clickable="true"
-                android:onClick="launchmainpage"/>
+                android:id="@+id/Login"
+                android:onClick="launchMainpage" />
 
             <Button
                 android:text="Register"

@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use UserBundle\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -18,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+
     /**
     * @Route("/")
     */
@@ -65,8 +67,9 @@ class DefaultController extends Controller
       $FormProductRegist = $this->get('form.factory')->createBuilder(FormType::class, $productsregister);
       $FormProductRegist
         ->add('recettename',   TextType::class)
-        ->add('recetteingre',  TextType::class)
+        ->add('recetteingre',  TextareaType::class)
         ->add('recettecalo',   TextType::class)
+        ->add('recettemethod',   TextareaType::class)
         ->add('image',          FileType::class)
         ->add('submit',         SubmitType::class, array('label' => "Enregister le produit"));
       $formPro = $FormProductRegist->getForm();
@@ -74,23 +77,48 @@ class DefaultController extends Controller
       if ($formPro->isSubmitted() && $formPro->isValid())
         {
           $repository = $this->getUser();
+
           $file = $productsregister->getImage();
           $filename = md5(uniqid()).'.'.$file->guessExtension();
           $file->move($this->getparameter('recip_directory'), $filename);
-          if (file_exists($repository->getImage()))
-            unlink($repository->getImage());
-
-          $repository->setRecettename(array($repository->getRecettename(), $productsregister->getRecettename()));
-          $repository->setRecetteingre(array($repository->getRecetteingre(), $productsregister->getRecetteingre()));
-          $repository->setRecettecalo(array($repository->getRecettecalo(), $productsregister->getRecettecalo()));
-          $repository->setImage("images_recip/" . $filename);
+          //if (file_exists($repository->getImage()))
+            //unlink($repository->getImage());
+          $array_1 = $repository->getRecettename(); $array_2 = $productsregister->getRecettename(); if ($array_1 == null) {$array_1 = array($array_2);} else array_push($array_1, $array_2);
+          $repository->setRecettename($array_1);
+          $array_1 = $repository->getRecetteingre(); $array_2 = $productsregister->getRecetteingre(); if ($array_1 == null) {$array_1 = array($array_2);} else array_push($array_1, $array_2);
+          $repository->setRecetteingre($array_1);
+          $array_1 = $repository->getRecettemethod(); $array_2 = $productsregister->getRecettemethod(); if ($array_1 == null) {$array_1 = array($array_2);} else array_push($array_1, $array_2);
+          $repository->setRecettemethod($array_1);
+          $array_1 = $repository->getRecettecalo(); $array_2 = $productsregister->getRecettecalo(); if ($array_1 == null) {$array_1 = array($array_2);} else array_push($array_1, $array_2);
+          $repository->setRecettecalo($array_1);
+          $array_1 = $repository->getImage(); if ($array_1 == null) {$array_1 = array("images_recip/" . $filename);} else array_push($array_1, ("images_recip/" . $filename));
+          $repository->setImage($array_1);
           $em = $this->getDoctrine()->getManager();
           $em->persist($repository);
           try {$em->flush();} catch (\Exception $e) {$message = "Une Erreure est survenue, verfiez que vous ayez remplis tous les champs correctement.";}
         }
         /* END Product Register */
 
-      return $this->render('UserBundle:Default:index.html.twig', array('form'=>$form->createView(), 'error_msg'=>$error_msg, 'formPro'=>$formPro->createView(), 'msg'=>$message));
+        /* GET PRODUCTS */
+        $recip = array();
+        $users = $this->getDoctrine()->getManager()->getRepository('UserBundle:User')->findBy(array(), array('name' => 'ASC'));
+          foreach ($users as $user) {
+            $nbr = 0;
+              if (is_array($user->getImage()) == true)
+                foreach ($user->getImage() as $image)
+                {
+                    array_push($recip, array('name' => $user->getRecettename()[$nbr], 'ingre' => $user->getRecetteingre()[$nbr],
+                                            'method' => $user->getRecettemethod()[$nbr], 'calo'=> $user->getRecettecalo()[$nbr], 'image'=> $image));
+
+                  $nbr = $nbr + 1;
+                }
+              else
+                array_push($recip, array('name' => $user->getRecettename(), 'ingre' => $user->getRecetteingre(),
+                                      'method' => $user->getRecettemethod(), 'calo'=> $user->getRecettecalo(), 'image'=> $user->getImage()));
+        }
+        /*END GET PRODUCTS */
+
+      return $this->render('UserBundle:Default:index.html.twig', array('form'=>$form->createView(), 'allrecip'=> $recip, 'error_msg'=>$error_msg, 'formPro'=>$formPro->createView(), 'msg'=>$message));
     }
 
     /**

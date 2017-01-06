@@ -157,7 +157,9 @@
 									<div class="recip_title_regis">Put your Recip Name</div>
 									{{ form_widget(formPro.recettename, {'attr': {'class': 'recette_regis'}}) }}
 									<div class="recip_title_regis">Your ingredients</div>
-									{{ form_widget(formPro.recetteingre, {'attr': {'class': 'recette_regis'}}) }}
+									{{ form_widget(formPro.recetteingre, {'attr': {'class': 'recette_regis_area'}}) }}
+									<div class="recip_title_regis">how to cook it</div>
+									{{ form_widget(formPro.recettemethod, {'attr': {'class': 'recette_regis_area'}}) }}
 									<div class="recip_title_regis">how many calories</div>
 									{{ form_widget(formPro.recettecalo, {'attr': {'class': 'recette_regis'}}) }}
 									<div class="recip_title_regis">Picture of the dish</div>
@@ -201,11 +203,19 @@
 				</div>
 				<div class="but_mid" id="showhide"></div>
 					<div class="container_rec"id="hide_show">
+						{% for recip in allrecip %}
+						<div class="block_recip">
+							<img src="{{recip.image}}" class="recip_image">
+							<div class="blok_name_ingre">
+							<h1 class="recip_name">{{recip.name}}</h1>
+							<p class="recip_ingre"><div class="add">Ingredients : </div> {{recip.ingre}}</p>
+						</div>
+							<p class="recip_method"><div class="add">Cook Recip : </div> {{recip.method}}</p>
+							<p class="recip_calo"><div class="add">Weight : </div> {{recip.calo}} kcal</p>
 
-
-							<p>This div will be show and hide on button click</p>
-
-
+						</div>
+						<div class="clr"></div>
+						{% endfor %}
 					</div>
 					<div class="container_base">
 				<div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.3s">

@@ -42,12 +42,17 @@ class User extends BaseUser
     protected $recetteingre;
 
     /**
+     * @ORM\Column(name="recettemethod", type="array")
+     */
+    protected $recettemethod;
+
+    /**
      * @ORM\Column(name="recettecalo", type="array")
      */
     protected $recettecalo;
 
     /**
-     * @ORM\Column(name="image", type="string", nullable=true)
+     * @ORM\Column(name="image", type="array", nullable=true)
      */
     protected $image;
 
@@ -206,5 +211,29 @@ class User extends BaseUser
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set recettemethod
+     *
+     * @param array $recettemethod
+     *
+     * @return User
+     */
+    public function setRecettemethod($recettemethod)
+    {
+        $this->recettemethod = $recettemethod;
+
+        return $this;
+    }
+
+    /**
+     * Get recettemethod
+     *
+     * @return array
+     */
+    public function getRecettemethod()
+    {
+        return $this->recettemethod;
     }
 }

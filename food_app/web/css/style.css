@@ -194,7 +194,7 @@ hr {
 }
 #gallery img {
   width: 100%;
-  padding-bottom: 18px;
+
 }
 #gallery .col-md-4 div {
   position: relative;
@@ -204,6 +204,7 @@ hr {
 #gallery h3 {
   font-size: 18px;
   line-height: 8px;
+	padding-top: 18px;
 }
 
 /* contact section */
@@ -391,9 +392,72 @@ footer .fa {
 }
 
 .recette_regis {
-	margin: 10px 10px 10px 55px;
+	margin: 10px 10px 10px;
+	border-radius: 3px;
+	border: 2px solid #828282;
+	display: block;
+	 margin-left: auto;
+	 margin-right: auto;
+}
+
+.recette_regis_area {
+	width: 300px;
+	height: 130px;
+	margin: 10px 10px 10px;
+	padding-left: 5px;
+	display: block;
+	 margin-left: auto;
+	 margin-right: auto;
+	border-radius: 3px;
+	border: 2px solid #828282;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .submit_image_regis {
 	margin: 10px 10px 10px 80px;
+}
+
+.block_recip {
+	width: 1150px;
+	border-radius: 7px;
+	float: left;
+	border: 3px solid #009900;
+	margin-bottom: 5px;
+}
+
+.recip_image {
+	max-width: 200px;
+	margin-bottom: 0px;
+	border-radius: 5px;
+	float: left;
+	border: 3px solid #4CAF10;
+	height: 250px;
+}
+
+.recip_name {
+	float: left;
+	width: 915px;
+	margin-left: 30px;
+	text-decoration: underline;
+}
+
+.recip_ingre {
+	float: left;
+	width: 920px;
+}
+
+.recip_method {
+	float: left;
+	width: 920px;
+}
+
+.add {
+font-weight: bold;
+float: left;
+margin-left: 20px;
+}
+
+.recip_calo {
+	float: left;
 }

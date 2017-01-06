@@ -3,7 +3,7 @@ var IngredientSchema = require("../models/ingredient");
 var RecipeSchema = require("../models/recipe");
 var jwt = require("express-jwt-token");
 var tError = require("../error/application.js").tError;
-var handler = require("../error/application.js").handle;
+var handle = require("../error/application.js").handle;
 var ObjectId = require('mongoose').Types.ObjectId;//Nasty mongoose bussiness
 route.get("/", function(req, res, next){
 	/*
@@ -95,7 +95,7 @@ route.get("/test/create/:itmn", function(req, res){
 			//user: 1,
 			//ingredients: [1],
 			//comments: [1],
-			text: "This is an example recipe",
+			directions: [{text:"This is an example recipe"},{text: "just fucking spread it on bread retard."}],
 			favorites: {
 				number: 9001//,
 				//schema: 1

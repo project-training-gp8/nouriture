@@ -95,14 +95,18 @@ route.get("/test/create/:itmn", function(req, res){
 			//user: 1,
 			//ingredients: [1],
 			//comments: [1],
-			directions: [{text:"This is an example recipe"},{text: "just fucking spread it on bread retard."}],
+			directions: [{text:"This is an example recipe"},
+									{text: "just fucking spread it on bread retard."}],
 			favorites: {
 				number: 9001//,
 				//schema: 1
-			}
+			},
+			desc: "Vous l'aimez vous la connaissez c'est bien elle oui."
 		});
 	testRecipes.save(function(err, whatever){
-		res.json({err: err, otherdata: whatever});
+		console.log(err, whatever);
+		res.p{err: err, otherdata: whatever};
+		res.send();
 	});
 });
 route.put("/test/cripple", jwt.jwtAuthProtected, function(req, res){

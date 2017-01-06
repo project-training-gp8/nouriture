@@ -35,7 +35,12 @@ public class Recipy extends AppCompatActivity {
         setContentView(R.layout.activity_recipy);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        try {
+            JSONObject obj =  new JSONObject(getIntent().getStringExtra("Json"));
+            createRecipy(obj);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void createRecipy(JSONObject obj) {

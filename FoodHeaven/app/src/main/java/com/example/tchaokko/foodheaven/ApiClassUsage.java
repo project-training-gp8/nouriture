@@ -84,13 +84,13 @@ public class ApiClassUsage {
         });
     }
 
-    public void getRecipyDetail(JSONArray infoRecipy) throws JSONException {
+    public void getRecipyDetail(int id, final MainPage mainPage) throws JSONException {
         RequestParams params = new RequestParams();
-        params.put("data", infoRecipy);
-        httpConnexionManager.get("api/test", params, new JsonHttpResponseHandler() {
+        httpConnexionManager.get("api/test/id:" + id + "/detailed", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 // If the response is JSONObject instead of expected JSONArray
+                mainPage.affRecipy(response);
             }
 
             @Override

@@ -1,5 +1,6 @@
 package com.example.tchaokko.foodheaven;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -88,6 +89,12 @@ public class MainPage extends AppCompatActivity
     }
     public void affHome(JSONArray array){
         
+    }
+
+    public void affRecipy(JSONObject object){
+        Intent MyIntent = new Intent(MainPage.this, Recipy.class);
+        MyIntent.putExtra("Json",object.toString());
+        MainPage.this.startActivity(MyIntent);
     }
 
     @Override

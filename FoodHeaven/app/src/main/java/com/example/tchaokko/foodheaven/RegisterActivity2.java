@@ -1,5 +1,6 @@
 package com.example.tchaokko.foodheaven;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -49,35 +50,30 @@ public class RegisterActivity2 extends AppCompatActivity {
         confirmPassword = (EditText)findViewById(R.id.confirmPassworrd);
         firstName = (EditText)findViewById(R.id.FistName);
         lastName = (EditText)findViewById(R.id.LastName);
-        if (!checkInfoRegistration()){
+        /*if (!checkInfoRegistration()){
             return;
-        }
-        JSONObject obj = new JSONObject();
+        }*/
+        String[] arrayParam =  new String[4];
+        arrayParam[0] =  firstName.getText().toString();
+        arrayParam[1] = lastName.getText().toString();
+        arrayParam[2] =  email.getText().toString();
+        arrayParam[3] =  HashMd5.md5(password.getText().toString());
         try {
-            obj.put("firstName", firstName.getText().toString());
-            obj.put("lastName", lastName.getText().toString());
-            obj.put("email", email.getText().toString());
-            obj.put("pwd",hashedpwd);
-            ApiClassUsage.FirstConnexion(obj);
-            cleanData();
+            ApiClassUsage.Register(arrayParam, this);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        catch(JSONException e){
+        cleanData();
+    }
 
-        }
+    public void sucessRegistration(){
+        Intent MyIntent = new Intent(RegisterActivity2.this, MainPage.class);
+        RegisterActivity2.this.startActivity(MyIntent);
     }
 
     private boolean checkInfoRegistration() {
         if (!checkpassword()){
             //TODO aff error password
-            return false;
-        }
-        if (email.getText().length() < 1
-                || firstName.getText().length() < 1
-                || lastName.getText().length() < 1
-                || this.year == -1
-                || this.month == -1
-                || this.day == -1){
-            //TODO aff error registration
             return false;
         }
         return true;
@@ -86,7 +82,7 @@ public class RegisterActivity2 extends AppCompatActivity {
     private boolean checkpassword() {
         String pass = password.getText().toString();
         String confPass = confirmPassword.getText().toString();
-        if (pass.contentEquals(confPass) && pass.length() > 6){
+        if (pass.contentEquals(confPass) && pass.length() >= 6){
             hashedpwd = HashMd5.md5(pass);
             return true;
         }

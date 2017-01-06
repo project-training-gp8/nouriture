@@ -31,6 +31,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,6 +101,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
     public void launchMainpage(View view) {
+        String[] param = new String[2];
+        param[0] = mEmailView.getText().toString();
+        param[1] = HashMd5.md5(mPasswordView.getText().toString());
+        try {
+            ApiClassUsage.Login(param,this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void launchMainpageBackup() {
+
         Intent MyIntent = new Intent(LoginActivity.this, MainPage.class);
         LoginActivity.this.startActivity(MyIntent);
     }

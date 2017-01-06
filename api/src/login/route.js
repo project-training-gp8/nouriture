@@ -14,10 +14,11 @@ function amt(err, req, res, next){
 route.post("/", function(req, res, next){
 	var UserSchema = require("../models/user");
 	//console.log(req.body);
-	UserSchema.findOne({name: req.body.user}, function(err, result){
+
+	UserSchema.findOne({email: req.params.email}, function(err, result){
 		//console.log(err,result);
 		if (result == null) {
-			return next("AuthenticationError");
+			return next(new tError(403, "AuthenticationError", null));
 		}
 		if (result != null) {
 			var token = {
@@ -37,13 +38,12 @@ route.post("/", function(req, res, next){
 					.update(pld.toString('base64'),'base64').digest("base64");
 					return retval;
 			}};
-			if (req.body.hashedpw == result.password)//not hashed right now
-			{
+			if (req.params.password == result.pass){
 				res.generic.data = {token: token.sig(token.header, token.payload)};
 			}
-			req.body.username;
-			req.body.email;
-			req.body.hashedpw;
+			else{
+				return next(new tError(403, "Authentication Error", null));
+			}
 		}
 		else {console.log(err);}
 		res.json(res.generic);

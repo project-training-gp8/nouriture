@@ -62,12 +62,22 @@ route.get("/u/:user"/*show 1 user*/, function(req, res){
 route.put("/"/*modify own user*/,
 	function(req, res, next){
 		var query = User.find({_id: req.locals.userId});
+
 		res.send(res.generic);
 	});
 /*Create a new user AKA register*/
 route.post("/"/*kittens and butterflies*/,
 	function (req, res, next){
+		if (req.params.pass && req.params.email && req.params.name){
+			var query = User.findOne({email: req.params.email});
+			query.exec(function(err, result){
+				if (!handle.database(error, req, res, next, result)){
 
+				}
+				return next(new tError(500, "Unreachable code reached pass us a phonecall", null));
+			});
+		}
+		return next(new tError(400, "Missing parameter", null));
 });
 route.get("/s/u/:userpattern"/*list users (needs to change) */, function(req, res){});
 

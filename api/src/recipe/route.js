@@ -15,10 +15,11 @@ route.get("/", function(req, res, next){
 	**	- 200 : Anonymous user -> homepage recipes
 	** TODO: plug authorization (we need an error sent back to an unauthenticated user)
 	*/
-	var query = RecipeSchema.find();
-	query.select({_id: 1, name:1, user: 1, desc: 1, image: 1});
-	query.limit(10);
-	query.exec(function(err, result){
+	RecipeSchema.find()
+	//query.select({_id: 1, name:1, user: 1, desc: 1, image: 1})
+	//.limit(10)
+	.exec(function(err, result){
+		console.log("why ...", err, result);
 		if (!handle.database(err, req, res, next, result)){
 			res.generic.data = result;
 			res.send(res.generic);
@@ -111,6 +112,7 @@ route.get("/test/create/:itmn", function(req, res){
 		res.generic.data = {err: err};
 		res.send(res.generic);
 	});
+	//res.send({lol:})
 });
 route.put("/test/cripple", jwt.jwtAuthProtected, function(req, res){
 	res.json({user: req.user});

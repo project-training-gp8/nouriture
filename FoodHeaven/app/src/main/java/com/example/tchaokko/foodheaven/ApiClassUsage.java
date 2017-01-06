@@ -67,10 +67,9 @@ public class ApiClassUsage {
         });
     }
 
-    public static void getRecipySimple(String[] arrayParams,  final LoginActivity test) throws JSONException {
+    public static void getRecipySimple(int id,  final MainPage page) throws JSONException {
         RequestParams params = new RequestParams();
-        //params.put("id", 1);
-        httpConnexionManager.get("api/recipe", params, new JsonHttpResponseHandler() {
+        httpConnexionManager.get("api/home/" + id, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 // If the response is JSONObject instead of expected JSONArray

@@ -64,7 +64,7 @@ route.get("/u/:user"/*show 1 user*/, function(req, res){
 route.put("/"/*modify own user*/,
 	function(req, res, next){
 		//var query = User.find({_id: req.locals.userId});
-    var query = req.findByIdAndUpdate(id, 
+    var query = req.findByIdAndUpdate(id,
     {
       $set: {
         name: req.param.name,
@@ -79,11 +79,22 @@ route.put("/"/*modify own user*/,
 /*Create a new user AKA register*/
 route.post("/"/*kittens and butterflies*/,
 	function (req, res, next){
-		if (req.params.pass && req.params.email && req.params.name){
+		if (req.body.password && req.body.email && req.body.name){
 			var query = User.findOne({email: req.params.email});
 			query.exec(function(err, result){
 				if (!handle.database(error, req, res, next, result)){
-
+					var innerQuery = new User({
+						firstName: req.body.firstName,
+						lastName: req.body.lastName,
+						name: req.body.firstName + req.body.lastName,
+						email: req.body.email,
+						pass: req.body.password,
+						avatar: req.body.image
+					});
+					innerQuery.save(function(err){
+						if (err){return next(new tError(400, "Database Error", err));}
+						res.send(res.generic);
+					});
 				}
 				return next(new tError(500, "Unreachable code reached pass us a phonecall", null));
 			});

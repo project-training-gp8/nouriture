@@ -22,8 +22,8 @@ route.get("/home/:offset?", function(req, res, next){
 		query.limit(10);
 	}
 	else{
-		smokeTwoJoints = req.param.offset;
-		query.skip(Number(req.param.offset)).limit(1);
+		smokeTwoJoints = req.params.offset;
+		query.skip(Number(req.params.offset)).limit(1);
 	}
 	query.exec(function(err, result){
 		//console.log("why ...>>", err, result, smokeTwoJoints);
@@ -32,9 +32,9 @@ route.get("/home/:offset?", function(req, res, next){
 				result[0].id = req.params.offset;
 			}
 			else{
-				for(i = 0; i < result.length; i++){
-						result[i].id = i;
-						console.log(result[i].id);
+				for(i = 0, len = result.length; i < len; i++){
+						result[i].andId = i;
+						console.log("id",result[i].andId,"i",i, "len",len);
 				}}
 			res.generic.data = result;
 			res.send(res.generic);

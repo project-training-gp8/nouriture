@@ -68,7 +68,7 @@ route.get("/s/:recipename", function(req, res){
 	//});
 });
 
-route.get("/:id/:requestDetailed?", function(req, res, next){
+route.get("/id/:id/:requestDetailed?", function(req, res, next){
 	if (req.params.requestDetailed &&
 		req.params.requestDetailed != "detailed"){
 		next();

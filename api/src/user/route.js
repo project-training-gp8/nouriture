@@ -1,7 +1,7 @@
 var route = require("express").Router();
 var tError = require("../error/application").tError;
 var handler = require("../error/application").handle;
-var User = require('./models/user');
+var User = require('../models/user');
 
 //Get a recipe
 //Anon

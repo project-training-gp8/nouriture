@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: UserBundle
+    database_user: root
+    database_password: root@Mysql28021994
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: f0c464e621a1b1d76e116254ab74c30da4f48188

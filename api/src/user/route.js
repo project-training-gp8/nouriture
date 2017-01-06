@@ -83,7 +83,7 @@ route.post("/"/*kittens and butterflies*/,
 		if (req.body.password && req.body.email){
 			var query = User.findOne({email: req.params.email});
 			query.exec(function(err, result){
-				console.log("user found? ", result);
+				console.log("user found? ", err, result);
 				if (!handler.database(err, req, res, next, result)){
 					var innerQuery = new User({
 						firstName: req.body.firstName,
@@ -94,7 +94,7 @@ route.post("/"/*kittens and butterflies*/,
 						avatar: req.body.image
 					});
 					innerQuery.save(function(err){
-						console.log("are we going to cry?");
+						console.log("are we going to cry?", err);
 						if (err){
 							return next(new tError(400, "Database Error", err));}
 						else{

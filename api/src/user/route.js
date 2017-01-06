@@ -1,6 +1,7 @@
 var route = require("express").Router();
 var tError = require("../error/application").tError;
 var handler = require("../error/application").handle;
+var User = require('./models/user');
 
 //Get a recipe
 //Anon
@@ -43,7 +44,6 @@ route.get("/recipes/", function(req, res, next){
 });
 
 route.param("user", function(req, res, next, userId){
-	var User = require('./models/user');
 	User.findOne({name: uid}, function(err, userResult){
 		if (err) next(err);//No user found or something
 		req.userParam = userResult;
@@ -58,8 +58,15 @@ route.get("/u/:user"/*show 1 user*/, function(req, res){
 	else
 	res.json({"success":true, "user": req.userParam});
 });
-route.put("/u/:user"/*modify own user*/, function(req, res){res.json({success:"false", error: "uninplemented"});});
-route.post("/u/new/:user"/*kittens and butterflies*/, function (req, res){
+
+route.put("/u/:user"/*modify own user*/,
+	function(req, res){
+		var query = User.find({});
+		res.send(res.generic);
+	});
+
+route.post("/new/"/*kittens and butterflies*/,
+	function (req, res, next){
 
 });
 route.get("/s/u/:userpattern"/*list users (needs to change) */, function(req, res){});

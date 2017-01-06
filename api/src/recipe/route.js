@@ -107,8 +107,8 @@ route.get("/test/create/:itmn", function(req, res){
 		});
 	testRecipes.save(function(err, whatever){
 		console.log(err, whatever);
-		res.p{err: err, otherdata: whatever};
-		res.send();
+		res.generic.data = {err: err, otherdata: whatever};
+		res.send(res.generic);
 	});
 });
 route.put("/test/cripple", jwt.jwtAuthProtected, function(req, res){

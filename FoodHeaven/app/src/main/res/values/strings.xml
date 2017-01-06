@@ -18,4 +18,5 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_test_avtivity">testAvtivity</string>
     <string name="title_activity_register2">Register</string>
+    <string name="title_activity_recipy">Recipy</string>
 </resources>

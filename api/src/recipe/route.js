@@ -90,6 +90,7 @@ route.param("itmn", function(req, res, itmname){
 	req.itemName = itmname;
 });
 route.get("/test/create/:itmn", function(req, res){
+	console.log("Database filler called with " + req.params.itmn);
 	var testRecipes = new RecipeSchema ({
 			name: req.itemName,
 			//user: 1,
@@ -101,13 +102,13 @@ route.get("/test/create/:itmn", function(req, res){
 				number: 9001//,
 				//schema: 1
 			},
-			desc: "Vous l'aimez vous la connaissez c'est bien elle oui."
+			desc: "Vous l'aimez vous la connaissez c'est bien elle oui.",
 			image:{large: "http://www.n-tv.de/img/incoming/origs3133601/6402733028-w1000-h960/nutella.jpg",
 						small: "http://images6.fanpop.com/image/photos/35000000/Nutella-chocolate-35061216-120-84.png"}
 		});
-	testRecipes.save(function(err, whatever){
-		console.log(err, whatever);
-		res.generic.data = {err: err, otherdata: whatever};
+	testRecipes.save(function(err){
+		console.log("save handler running error is:"  + err);
+		res.generic.data = {err: err};
 		res.send(res.generic);
 	});
 });

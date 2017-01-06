@@ -5,7 +5,7 @@ var jwt = require("express-jwt-token");
 var tError = require("../error/application.js").tError;
 var handle = require("../error/application.js").handle;
 var ObjectId = require('mongoose').Types.ObjectId;//Nasty mongoose bussiness
-route.get("/", function(req, res, next){
+route.get("/home/:offset", function(req, res, next){
 	/*
 	** Get the lastest user submited/favorited recipes
 	**
@@ -15,10 +15,15 @@ route.get("/", function(req, res, next){
 	**	- 200 : Anonymous user -> homepage recipes
 	** TODO: plug authorization (we need an error sent back to an unauthenticated user)
 	*/
-	RecipeSchema.find()
-	//query.select({_id: 1, name:1, user: 1, desc: 1, image: 1})
-	//.limit(10)
-	.exec(function(err, result){
+	var query = RecipeSchema.find()
+		.select({_id: 1, name:1, user: 1, desc: 1, image: 1});
+	if (!req.params.offset){
+		query.limit(10);
+	}
+	else{
+		query.skip(req.param.offset).limit(1);
+	}
+	query.exec(function(err, result){
 		console.log("why ...", err, result);
 		if (!handle.database(err, req, res, next, result)){
 			res.generic.data = result;

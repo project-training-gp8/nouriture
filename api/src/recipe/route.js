@@ -21,7 +21,7 @@ route.get("/home/:offset", function(req, res, next){
 		query.limit(10);
 	}
 	else{
-		query.skip(req.param.offset).limit(1);
+		query.skip(Number(req.param.offset)).limit(1);
 	}
 	query.exec(function(err, result){
 		console.log("why ...", err, result);

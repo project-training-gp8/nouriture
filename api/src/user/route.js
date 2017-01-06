@@ -84,7 +84,7 @@ route.post("/"/*kittens and butterflies*/,
 			var query = User.findOne({email: req.params.email});
 			query.exec(function(err, result){
 				console.log("user found? ", result);
-				if (!handle.database(error, req, res, next, result)){
+				if (!handler.database(error, req, res, next, result)){
 					var innerQuery = new User({
 						firstName: req.body.firstName,
 						lastName: req.body.lastName,

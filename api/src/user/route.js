@@ -30,6 +30,7 @@ route.get("/recipes/:user?/:list", function(req, res, next){
 	}
 	query.exec(function(err, resultsArray){
 		if (!handler.database(err, req, res, next, result)){
+			res.generic.data = resultsArray;
 			res.send(res.generic);
 		}
 		//never reached

@@ -3,7 +3,7 @@ var IngredientSchema = require("../models/ingredient");
 var RecipeSchema = require("../models/recipe");
 var jwt = require("express-jwt-token");
 var tError = require("../error/application.js").tError;
-var Errorlist = require("../error/application.js").errors;
+var handler = require("../error/application.js").handle;
 var ObjectId = require('mongoose').Types.ObjectId;//Nasty mongoose bussiness
 route.get("/", function(req, res, next){
 	/*
@@ -15,9 +15,15 @@ route.get("/", function(req, res, next){
 	**	- 200 : Anonymous user -> homepage recipes
 	** TODO: plug authorization (we need an error sent back to an unauthenticated user)
 	*/
-	if (true){
-		next(new tError(501, "method unimplemted", null));
-	}
+	var query = RecipeSchema.find();
+	query.select({_id: 1, name:1, user: 1, desc: 1, image: 1});
+	query.limit(10);
+	query.exec(function(err, result){
+		if (!handle.database(err, req, res, next, result)){
+			res.generic.data = result;
+			res.send(res.generic);
+		}
+	});
 });
 
 //Should params be imported from yet another sourcefile ?

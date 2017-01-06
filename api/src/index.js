@@ -27,13 +27,11 @@ if (true){//TODO: use configuration switch (from package.json/commandline config
 var db_host = process.env.NOURRITURE_DB_HOST || "localhost";
 var redis_host = process.env.NOURRITURE_REDIS_HOST || "localhost";
 var port = process.env.NOURRITURE_PORT || 8090;//use package->config
-//var mongoUri = "mongodb://127.0.0.1/test";
+
 var mongoUri = "mongodb://"+db_host+"/nourriture";
 //Configuration
-//db.connect(mongoUri);
-//console.log("some more interesting connection reuse is going on and i don't know about it.");
-app.redisCache = redis.createClient({host: redis_host});
 
+app.redisCache = redis.createClient({host: redis_host});
 app.dbMongo = db.connect(mongoUri);
 app.disable('x-powered-by');
 app.disable('date');
@@ -47,7 +45,7 @@ app.use("/", function(req, res, next){
 	req.cache = app.redisCache;
 	req.db = app.dbMongo;
 	res.generic = {err: null, data: null};
-	//console.log("why do you remind me of the documentation i did not read properly ?");
+
 	next();
 });
 // use body parser so we can get info from POST and/or URL parameters

@@ -95,15 +95,19 @@ route.post("/"/*kittens and butterflies*/,
 					});
 					innerQuery.save(function(err){
 						console.log("are we going to cry?");
-						if (err){return next(new tError(400, "Database Error", err));}
-						console.log("last stage of user register it works good job!");
-						res.send(res.generic);
+						if (err){
+							return next(new tError(400, "Database Error", err));}
+						else{
+							console.log("last stage of user register it works good job!");
+							return res.send(res.generic);
+						}
 					});
 				}
 				return next(new tError(500, "Unreachable code reached pass us a phonecall", null));
 			});
 		}
-		return next(new tError(400, "Missing parameter", null));
+		else{
+		return next(new tError(400, "Missing parameter X", null));}
 });
 route.get("/s/u/:userpattern"/*list users (needs to change) */, function(req, res){});
 

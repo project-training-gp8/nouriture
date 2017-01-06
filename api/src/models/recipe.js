@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 //var ObjectId = require('mongoose').Types.ObjectId;
 //var IngredientSchema = require("ingredient");
-var Caca = ;
 var Schema = mongoose.Schema;
 
 module.exports = mongoose.model("Recipe", new Schema({

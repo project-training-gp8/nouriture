@@ -94,8 +94,9 @@ route.post("/"/*kittens and butterflies*/,
 						avatar: req.body.image
 					});
 					innerQuery.save(function(err){
+						console.log("are we going to cry?");
 						if (err){return next(new tError(400, "Database Error", err));}
-						console.log("last stage of user register it works godd job!");
+						console.log("last stage of user register it works good job!");
 						res.send(res.generic);
 					});
 				}

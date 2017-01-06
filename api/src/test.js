@@ -1,10 +1,8 @@
 var route = require("express").Router();
-var redis = require("redis");
 
-var ccache = redis.createClient();
 route.get("/test", function(req, res, next){
 	//var key = req.get("key");
-	ccache.get("testkey", function(err, replies){
+	req.cache.get("testkey", function(err, replies){
 		//lolz
 		//console.log("test -> redis get", err, replies);
 		res.send("Redis Response:" + replies);
@@ -14,19 +12,19 @@ route.get("/test", function(req, res, next){
 route.post("/test/:key", function(req, res, next){
 	//var key = req.get("key");
 	//console.log("Not even getting there...");
-	
+
 	//var key = req.params("key", "empty_key");
 	var key = req.params.key;
 	var mprop = req.myPropi || "CACA";
 	if (key === "empty_key" && key == "empty_key") {console.log("Stupid");
 	res.json({"error": "bad param shit"});}
-	ccache.set("testkey", key, function(err, replies){
+	req.cache.set("testkey", key, function(err, replies){
 		res.json({ "error": err, "response": replies, "value": key, "myprop": req.myProp });//"Server Says: " + replies
 	});
 });
 route.param("key", function(req, res, next, id){
 	//console.log("stupid key matching function with key=\"" + id + "\"");
-	ccache.get("key", function(err, replies){
+	req.cache.get("key", function(err, replies){
 		//id
 		if (err) next(err);
 		req.myProp = replies;

@@ -6,5 +6,5 @@ var recipeRoute = require("./recipe/route");
 module.exports = function(app){
   app.use("/api/login/", loginRoute);
   app.use("/api/user/", userRoute);
-  app.use("/api/recipe", recipeRoute);
+  app.use("/api/recipe/", recipeRoute);
 };

@@ -5,7 +5,7 @@ var jwt = require("express-jwt-token");
 var tError = require("../error/application.js").tError;
 var handle = require("../error/application.js").handle;
 var ObjectId = require('mongoose').Types.ObjectId;//Nasty mongoose bussiness
-route.get("/home/:offset", function(req, res, next){
+route.get("/home/:offset?", function(req, res, next){
 	/*
 	** Get the lastest user submited/favorited recipes
 	**

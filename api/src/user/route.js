@@ -84,7 +84,7 @@ route.post("/"/*kittens and butterflies*/,
 			var query = User.findOne({email: req.params.email});
 			query.exec(function(err, result){
 				console.log("user found? ", err, result);
-				if (!handler.database(err, req, res, next, result)){
+				if (!err){
 					var innerQuery = new User({
 						firstName: req.body.firstName,
 						lastName: req.body.lastName,
@@ -103,7 +103,8 @@ route.post("/"/*kittens and butterflies*/,
 						}
 					});
 				}
-				return next(new tError(500, "Unreachable code reached pass us a phonecall", null));
+				else
+				return next(new tError(500, "Database error", null));
 			});
 		}
 		else{

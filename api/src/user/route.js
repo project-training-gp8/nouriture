@@ -53,7 +53,7 @@ route.param("user", function(req, res, next, userId){
 	});
 });
 
-route.get("/u/:user"/*show 1 user*/, function(req, res){
+route.get("/u/:user"/*show 1 user*/, function(req, res, next){
 	//put some privacy in there ?
 	if (req.userParam == undefined){ res.code = 418;
 	res.json({"success": false, "error": "bad user"});}

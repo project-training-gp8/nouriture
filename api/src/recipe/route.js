@@ -92,13 +92,14 @@ route.get("/:id/:requestDetailed?", function(req, res, next){
 //!!
 //!!
 //Testing routes plz remove them!!!
-route.param("itmn", function(req, res, itmname){
+route.param("itmn", function(req, res, next, itmname){
 	req.itemName = itmname;
+	next();
 });
 route.get("/test/create/:itmn", function(req, res, next){
 	console.log("Database filler called with " + req.params.itmn);
 	var testRecipes = new RecipeSchema ({
-			name: req.itemName,
+			name: req.params.itmn,
 			//user: 1,
 			//ingredients: [1],
 			//comments: [1],

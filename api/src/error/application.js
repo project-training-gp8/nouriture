@@ -60,7 +60,7 @@ function(error, req, res, next){
     res.generic.err = "Internal server error, please try again later.";
   }
   //TODO: Have more time to do things here
-  console.log("DEBUG MODE:", error);
+  //console.log("DEBUG MODE:", error);
   return res.status(statusCode).send(res.generic);
 }
 exports.handle = {};
@@ -68,7 +68,7 @@ exports.handle.database = function(error, req, res, next, result){
   if (error){
     return next(new tError(500, tError.dbError, error));
   } else if (!result){
-    return next(new tError(500, tError.notFound, null));
+    return next(new tError(404, tError.notFound, null));
   }
   else{
     return false;

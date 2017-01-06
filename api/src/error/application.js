@@ -60,6 +60,7 @@ function(error, req, res, next){
     res.generic.err = "Internal server error, please try again later.";
   }
   //TODO: Have more time to do things here
+  console.log("DEBUG MODE:", error);
   return res.status(statusCode).send(res.generic);
 }
 exports.handle = {};

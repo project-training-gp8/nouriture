@@ -49,6 +49,7 @@ public class ApiClassUsage {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 // If the response is JSONObject instead of expected JSONArray
+
                 test.launchMainpageBackup();
             }
 
@@ -101,10 +102,10 @@ public class ApiClassUsage {
         });
     }
 
-    public void getRecipyHome() throws JSONException {
+    public static  void getRecipyHome(final MainPage page) throws JSONException {
         RequestParams params = new RequestParams();
         //TODO CREATE PARAMS FOR RECIPY HOME
-        httpConnexionManager.get("api/test", params, new JsonHttpResponseHandler() {
+        httpConnexionManager.get("api/home", params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 // If the response is JSONObject instead of expected JSONArray
@@ -113,7 +114,7 @@ public class ApiClassUsage {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 //if the response is a JSON ARRAY
-                // TODO AFF HOME RECIPY
+               page.affHome(response);
             }
         });
     }

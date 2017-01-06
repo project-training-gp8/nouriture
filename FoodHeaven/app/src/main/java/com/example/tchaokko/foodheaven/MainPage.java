@@ -7,6 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -24,6 +29,11 @@ public class MainPage extends AppCompatActivity
         RecyclerView rvItems = (RecyclerView)findViewById(R.id.recycle_main);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rvItems.setLayoutManager(linearLayoutManager);
+        try {
+            ApiClassUsage.getRecipyHome(this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         mItems = new HashMap<>();
         mItems.put("TRY", R.drawable.common_plus_signin_btn_icon_dark);
@@ -75,6 +85,9 @@ public class MainPage extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_date_picker, menu);
         return true;
+    }
+    public void affHome(JSONArray array){
+        
     }
 
     @Override

@@ -112,7 +112,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     public void launchMainpageBackup() {
-
         Intent MyIntent = new Intent(LoginActivity.this, MainPage.class);
         LoginActivity.this.startActivity(MyIntent);
     }

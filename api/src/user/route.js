@@ -79,11 +79,11 @@ route.put("/"/*modify own user*/,
 /*Create a new user AKA register*/
 route.post("/"/*kittens and butterflies*/,
 	function (req, res, next){
-		console.log("Requested user account", req.body);
+		//console.log("Requested user account", req.body);
 		if (req.body.password && req.body.email){
 			var query = User.findOne({email: req.params.email});
 			query.exec(function(err, result){
-				console.log("user found? ", err, result);
+				//console.log("user found? ", err, result);
 				if (!err){
 					var innerQuery = new User({
 						firstName: req.body.firstName,
@@ -93,18 +93,19 @@ route.post("/"/*kittens and butterflies*/,
 						pass: req.body.password,
 						avatar: req.body.image
 					});
+					if (result){return next(new tError(409, "User already exists", null));}
 					innerQuery.save(function(err){
-						console.log("are we going to cry?", err);
+						//console.log("are we going to cry?", err);
 						if (err){
-							return next(new tError(400, "Database Error", err));}
+							return next(new tError(500, "Database Error", err));}
 						else{
-							console.log("last stage of user register it works good job!");
+							//console.log("last stage of user register it works good job!");
 							return res.send(res.generic);
 						}
 					});
 				}
-				else
-				return next(new tError(500, "Database error", null));
+				else{
+					return next(new tError(500, "Database error", null));}
 			});
 		}
 		else{

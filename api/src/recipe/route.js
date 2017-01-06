@@ -15,17 +15,27 @@ route.get("/home/:offset?", function(req, res, next){
 	**	- 200 : Anonymous user -> homepage recipes
 	** TODO: plug authorization (we need an error sent back to an unauthenticated user)
 	*/
+	var smokeTwoJoints = null;
 	var query = RecipeSchema.find()
 		.select({_id: 1, name:1, user: 1, desc: 1, image: 1});
 	if (!req.params.offset){
 		query.limit(10);
 	}
 	else{
+		smokeTwoJoints = req.param.offset;
 		query.skip(Number(req.param.offset)).limit(1);
 	}
 	query.exec(function(err, result){
-		console.log("why ...", err, result);
+		//console.log("why ...>>", err, result, smokeTwoJoints);
 		if (!handle.database(err, req, res, next, result)){
+			if (smokeTwoJoints){
+				result[0].id = req.params.offset;
+			}
+			else{
+				for(i = 0; i < result.length; i++){
+						result[i].id = i;
+						console.log(result[i].id);
+				}}
 			res.generic.data = result;
 			res.send(res.generic);
 		}
@@ -34,7 +44,7 @@ route.get("/home/:offset?", function(req, res, next){
 
 //Should params be imported from yet another sourcefile ?
 route.param("user", function(req, res, next, uid){
-	var User = require('./models/user');
+	var User = require('../models/user');
 	User.findOne({name: uid}, function(err, userResult){
 		if (err) next(new tError(500, tError.list.dbError, err));//No user found or something
 		if (!err && !userResult) next(new tError(404, tError, null));
@@ -67,7 +77,9 @@ route.get("/s/:recipename", function(req, res){
 		//});
 	//});
 });
-
+/**Golden
+**
+**/
 route.get("/id/:id/:requestDetailed?", function(req, res, next){
 	if (req.params.requestDetailed &&
 		req.params.requestDetailed != "detailed"){

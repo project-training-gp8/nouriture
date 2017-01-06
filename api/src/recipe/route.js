@@ -95,7 +95,7 @@ route.get("/:id/:requestDetailed?", function(req, res, next){
 route.param("itmn", function(req, res, itmname){
 	req.itemName = itmname;
 });
-route.get("/test/create/:itmn", function(req, res){
+route.get("/test/create/:itmn", function(req, res, next){
 	console.log("Database filler called with " + req.params.itmn);
 	var testRecipes = new RecipeSchema ({
 			name: req.itemName,

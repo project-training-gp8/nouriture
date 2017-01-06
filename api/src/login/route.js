@@ -13,7 +13,7 @@ function amt(err, req, res, next){
 }
 route.post("/", function(req, res, next){
 	var UserSchema = require("../models/user");
-	//console.log(req.body);
+	console.log(req.params, req.body);
 
 	UserSchema.findOne({email: req.params.email}, function(err, result){
 		//console.log(err,result);

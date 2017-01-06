@@ -23,22 +23,13 @@ public class RegisterActivity2 extends AppCompatActivity {
     int year = -1;
     int month = -1;
     int day = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-            }
-        });
     }
 
     public void fillDateBirthday(DatePicker date){
@@ -68,6 +59,7 @@ public class RegisterActivity2 extends AppCompatActivity {
             obj.put("email", email.getText().toString());
             obj.put("pwd",hashedpwd);
             ApiClassUsage.FirstConnexion(obj);
+            cleanData();
         }
         catch(JSONException e){
 
@@ -99,5 +91,13 @@ public class RegisterActivity2 extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public  void cleanData(){
+        email.setText("");
+        password.setText("");
+        confirmPassword.setText("");
+        firstName.setText("");
+        lastName.setText("");
     }
 }

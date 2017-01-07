@@ -56,7 +56,7 @@ class DefaultController extends Controller
             $error_msg = "Already used email, take another one.";
           if (!empty( ($test = $userManager->findUserBy(array('username' => $form['username']->getData()))) ))
             $error_msg = "Username already used, take another one";
-          return $this->render('UserBundle:Default:index.html.twig', array('form'=>$form->createView(), 'error_msg'=>$error_msg));
+          return $this->render('UserBundle:Default:index.html.twig', array('form'=>$form->createView(), 'error_msg'=>$error_msg, 'allrecip'=> null));
 
         }
       }
@@ -104,6 +104,9 @@ class DefaultController extends Controller
         $users = $this->getDoctrine()->getManager()->getRepository('UserBundle:User')->findBy(array(), array('name' => 'ASC'));
           foreach ($users as $user) {
             $nbr = 0;
+            if (!empty($user->getImage()))
+            {
+              $i = count($user->getImage());
               if (is_array($user->getImage()) == true)
                 foreach ($user->getImage() as $image)
                 {
@@ -115,10 +118,43 @@ class DefaultController extends Controller
               else
                 array_push($recip, array('name' => $user->getRecettename(), 'ingre' => $user->getRecetteingre(),
                                       'method' => $user->getRecettemethod(), 'calo'=> $user->getRecettecalo(), 'image'=> $user->getImage()));
+            }
         }
         /*END GET PRODUCTS */
 
-      return $this->render('UserBundle:Default:index.html.twig', array('form'=>$form->createView(), 'allrecip'=> $recip, 'error_msg'=>$error_msg, 'formPro'=>$formPro->createView(), 'msg'=>$message));
+        /* Delete products start */
+        $val = null;
+        $user = $this->getUser();
+        if (($user && is_array($user->getRecettename()) && !empty($user->getRecettename())) || ($user && is_array(!$user->getRecettename()) && $user->getRecettename() != null))
+          $val = 1;
+        if ($request->getMethod() == 'POST' && !$form->isSubmitted() && !$formPro->isSubmitted())
+          {
+            $idname = array_search($_POST['submit'], $user->getRecettename());
+            if (file_exists($user->getImage()[$idname]))
+              unlink($user->getImage()[$idname]);
+              $name = $user->getRecettename();
+              $image = $user->getImage();
+              $calo = $user->getRecettecalo();
+              $ingre = $user->getRecetteingre();
+              $method = $user->getRecettemethod();
+            unset($name[$idname]);
+            unset($calo[$idname]);
+            unset($ingre[$idname]);
+            unset($method[$idname]);
+            unset($image[$idname]);
+            $user->setRecettename($name);
+            $user->setRecettecalo($calo);
+            $user->setRecetteingre($ingre);
+            $user->setRecettemethod($method);
+            $user->setImage($image);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            try {$em->flush();} catch (\Exception $e) {$message = "Une Erreure est survenue en suprimant.";}
+
+          }
+        /*delete products end */
+
+      return $this->render('UserBundle:Default:index.html.twig', array('form'=>$form->createView(), 'allrecip'=> $recip, 'error_msg'=>$error_msg, 'formPro'=>$formPro->createView(), 'msg'=>$message, 'val'=> $val));
     }
 
     /**

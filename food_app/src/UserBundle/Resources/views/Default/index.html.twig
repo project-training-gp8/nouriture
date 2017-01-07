@@ -173,7 +173,32 @@
 							<li><a> Is Forbiden every inapropriate content </a></li>
 							<li><a>{{msg}}</a></li>
 						</ul>
+
+						<li><div class="more_down"> <div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								<div> Delete recip </div>
+								<span class="caret"></span>
+							</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							{% if val == null %}
+							<li role="separator" class="divider"></li>
+							<li><a href="#">You have no recipt with your account</a></li>
+							</ul>
+							{% else %}
+								{% for recip in allrecip %}
+								<form class="name" method="post">
+									<p class="supr_name">{{recip.name}}</p>
+									<button name="submit" type="submit" value="{{ recip.name }}" class="supr_name_but">Suprimer</button>
+							</form>
+						{% endfor %}
+						<li role="separator" class="divider"></li>
+						<li><a href="#">* WARNING : IF YOU DELETED SOMETHING AND IT STILL APPEAR *</a></li>
+						<li><a href="#">* REFRESH YOUR PAGE *</a></li>
+						</ul>
+						{% endif %}
 					{% endif %}
+
+
 					</div></div></li>
 				</ul>
 			</div>
@@ -208,10 +233,10 @@
 							<img src="{{recip.image}}" class="recip_image">
 							<div class="blok_name_ingre">
 							<h1 class="recip_name">{{recip.name}}</h1>
-							<p class="recip_ingre"><div class="add">Ingredients : </div> {{recip.ingre}}</p>
+							<p class="recip_ingre"><div class="add">Ingredients : </div><div class="scale"> {{recip.ingre}}</div></p>
 						</div>
-							<p class="recip_method"><div class="add">Cook Recip : </div> {{recip.method}}</p>
-							<p class="recip_calo"><div class="add">Weight : </div> {{recip.calo}} kcal</p>
+							<p class="recip_method"><div class="add">Cook Recip : </div><div class="scale">{{recip.method}}</div></p>
+							<p class="recip_calo"><div class="add">Weight : </div><div class="scale">{{recip.calo}} kcal</div></p>
 
 						</div>
 						<div class="clr"></div>
@@ -263,35 +288,35 @@
 					<hr>
 				</div>
 				<div class="col-md-6 col-sm-6">
-					<h4>Lemon-Rosemary Vegetable ................ <span>$20.50</span></h4>
+					<h4>Lemon-Rosemary Vegetable ................ <span>250kcal</span></h4>
 					<h5>Chicken / Rosemary / Lemon</h5>
 				</div>
 				<div class="col-md-6 col-sm-6">
-					<h4>Lemon-Rosemary Meat ........................... <span>$30.50</span></h4>
+					<h4>Lemon-Rosemary Meat ........................... <span>1500kcal</span></h4>
 					<h5>Meat / Rosemary / Lemon</h5>
 				</div>
 				<div class="col-md-6 col-sm-6">
-					<h4>Lemon-Rosemary Pork ........................ <span>$40.75</span></h4>
+					<h4>Lemon-Rosemary Pork ........................ <span>1790kcal</span></h4>
 					<h5>Pork / Tooplate / Lemon</h5>
 				</div>
 				<div class="col-md-6 col-sm-6">
-					<h4>Orange-Rosemary Salad .......................... <span>$55.00</span></h4>
+					<h4>Orange-Rosemary Salad .......................... <span>600kcal</span></h4>
 					<h5>Salad / Rosemary / Orange</h5>
 				</div>
 				<div class="col-md-6 col-sm-6">
-					<h4>Lemon-Rosemary Squid ...................... <span>$65.00</span></h4>
+					<h4>Lemon-Rosemary Squid ...................... <span>1100kcal</span></h4>
 					<h5>Squid / Rosemary / Lemon</h5>
 				</div>
 				<div class="col-md-6 col-sm-6">
-					<h4>Orange-Rosemary Shrimp ........................ <span>$70.50</span></h4>
+					<h4>Orange-Rosemary Shrimp ........................ <span>750kcal</span></h4>
 					<h5>Shrimp / Rosemary / Orange</h5>
 				</div>
 				<div class="col-md-6 col-sm-6">
-					<h4>Lemon-Rosemary Prawn ................... <span>$110.75</span></h4>
+					<h4>Lemon-Rosemary Prawn ................... <span>1400kcal</span></h4>
 					<h5>Chicken / Rosemary / Lemon</h5>
 				</div>
 				<div class="col-md-6 col-sm-6">
-					<h4>Lemon-Rosemary Seafood ..................... <span>$220.50</span></h4>
+					<h4>Lemon-Rosemary Seafood ..................... <span>1350kcal</span></h4>
 					<h5>Seafood / Rosemary / Lemon</h5>
 				</div>
 			</div>
@@ -342,7 +367,7 @@
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.6s">
-					<h2 class="heading">Open Hours</h2>
+					<h2 class="heading">Open Hours (phone)</h2>
 					<p>Sunday <span>10:30 AM - 10:00 PM</span></p>
 					<p>Mon-Fri <span>9:00 AM - 8:00 PM</span></p>
 					<p>Saturday <span>11:30 AM - 10:00 PM</span></p>

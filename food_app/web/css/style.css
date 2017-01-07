@@ -437,27 +437,44 @@ footer .fa {
 
 .recip_name {
 	float: left;
-	width: 915px;
+	width: 900px;
 	margin-left: 30px;
 	text-decoration: underline;
 }
 
 .recip_ingre {
-	float: left;
-	width: 920px;
+	margin-left: 10px;
+	width: 900px;
 }
 
 .recip_method {
-	float: left;
-	width: 920px;
+	width: 900px;
+	margin-left: 10px;
+
+}
+
+.scale {
+	max-width: 1200px;
+
 }
 
 .add {
 font-weight: bold;
 float: left;
 margin-left: 20px;
+margin-right: 5px;
 }
 
 .recip_calo {
 	float: left;
+}
+
+.supr_name {
+	float: left;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+.supr_name_but {
+
 }

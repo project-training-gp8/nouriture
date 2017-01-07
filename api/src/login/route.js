@@ -2,7 +2,7 @@ var route = require("express").Router();
 var crypto = require('crypto');
 var tError = require('../error/application').tError;
 //Pull dependency of a dependency it's a dangerous gane you're playing
-var jws = require('../../node_modules/express-jwt-token/node_modules/jsonwebtokens/index');
+var jws = require('../../node_modules/express-jwt-token/node_modules/jsonwebtoken/index');
 const StringDecoder = require('string_decoder').StringDecoder;
 function amt(err, req, res, next){
 	console.log("Not reaching this code ever..", err);

@@ -1,7 +1,8 @@
 var route = require("express").Router();
 var crypto = require('crypto');
 var tError = require('../error/application').tError;
-
+//Pull dependency of a dependency it's a dangerous gane you're playing
+var jws = require('../../node_modules/express-jwt-token/node_modules/jsonwebtokens/index');
 const StringDecoder = require('string_decoder').StringDecoder;
 function amt(err, req, res, next){
 	console.log("Not reaching this code ever..", err);
@@ -39,7 +40,8 @@ route.post("/", function(req, res, next){
 					return retval;
 			}};
 			if (req.body.password == result.pass){
-				res.generic.data = {token: token.sig(token.header, token.payload)};
+				//res.generic.data = {token: token.sig(token.header, token.payload)};
+				res.generic.data = {token: jws.sign(token.payload,process.env.JWT_SECRET_KEY || 'secret')};
 			}
 			else{
 				return next(new tError(403, "Authentication Error", null));
